@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdminPro - Protótipo de Gestão Financeira</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+    <div class="flex flex-1">
+        <aside class="w-64 bg-gray-800 text-white p-6 flex flex-col rounded-tr-lg rounded-br-lg shadow-lg">
+            <div class="text-2xl font-bold mb-8 text-indigo-400">AdminPro</div>
+            <nav class="flex-1">
+                <ul>
+                    <li class="mb-4">
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200 active-link" data-section="dashboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard mr-3"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+                            Painel
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200" data-section="cash-flow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up mr-3"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                            Fluxo de Caixa
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200" data-section="reports">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text mr-3"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                            Relatórios
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200" data-section="projections">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-line-chart mr-3"><path d="M3 3v18h18"/><path d="m18 6-6 6-4-4-3 3"/></svg>
+                            Projeções
+                        </a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="#" class="flex items-center p-3 rounded-lg hover:bg-gray-700 transition-colors duration-200" data-section="accounts">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wallet mr-3"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h12a2 2 0 0 1 0 4H5a2 2 0 0 0 0 4h12c.7 0 1.3.3 2 .7V20a1 1 0 0 0 1-1V11a1 1 0 0 0-1-1H9a2 2 0 0 1 0-4h10Z"/></svg>
+                            Contas
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-8 overflow-y-auto">
+            <section id="dashboard" class="content-section active">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Painel de Controle</h1>
+                <p class="text-gray-600 mb-8">Visão geral das suas finanças e principais métricas.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-3">Receita Total</h2>
+                        <p class="text-3xl font-bold text-green-600">R$ 15.200,00</p>
+                        <p class="text-sm text-gray-500 mt-2">Últimos 30 dias</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-3">Despesa Total</h2>
+                        <p class="text-3xl font-bold text-red-600">R$ 8.500,00</p>
+                        <p class="text-sm text-gray-500 mt-2">Últimos 30 dias</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-3">Saldo Atual</h2>
+                        <p class="text-3xl font-bold text-blue-600">R$ 6.700,00</p>
+                        <p class="text-sm text-gray-500 mt-2">Disponível em contas</p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Gráfico de Fluxo de Caixa (Simulado)</h2>
+                    <img src="https://placehold.co/800x300/e0e7ff/3f51b5?text=Gráfico+de+Fluxo+de+Caixa" alt="Gráfico de Fluxo de Caixa Simulado" class="w-full h-auto rounded-md object-cover">
+                    <p class="text-sm text-gray-500 mt-4">Este gráfico visualiza as tendências de receita e despesa ao longo do tempo.</p>
+                </div>
+            </section>
+
+            <section id="cash-flow" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Controle de Fluxo de Caixa</h1>
+                <p class="text-gray-600 mb-8">Registre suas entradas e saídas para um controle financeiro preciso.</p>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Adicionar Transação</h2>
+                    <form id="transaction-form">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+                                <input type="text" id="description" name="description" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Pagamento de aluguel">
+                            </div>
+                            <div>
+                                <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">Valor (R$)</label>
+                                <input type="number" id="amount" name="amount" step="0.01" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="type" class="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
+                                <select id="type" name="type" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="income">Receita</option>
+                                    <option value="expense">Despesa</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
+                                <input type="text" id="category" name="category" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Salário, Contas de Consumo">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors duration-200 shadow-md">Adicionar Transação</button>
+                    </form>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Últimas Transações</h2>
+                    <div id="transactions-list" class="space-y-4">
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-md border border-gray-200">
+                            <span class="font-medium text-gray-800">Salário</span>
+                            <span class="text-green-600 font-semibold">+R$ 5.000,00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-md border border-gray-200">
+                            <span class="font-medium text-gray-800">Aluguel</span>
+                            <span class="text-red-600 font-semibold">-R$ 1.500,00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-md border border-gray-200">
+                            <span class="font-medium text-gray-800">Venda de Produto X</span>
+                            <span class="text-green-600 font-semibold">+R$ 2.500,00</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reports" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Relatórios Financeiros</h1>
+                <p class="text-gray-600 mb-8">Acesse relatórios detalhados para uma análise profunda das suas finanças.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-3">Relatório de Despesas por Categoria</h2>
+                        <p class="text-gray-600 mb-4">Visualize onde seu dinheiro está sendo gasto.</p>
+                        <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 shadow-md">Gerar Relatório</button>
+                        <img src="https://placehold.co/400x200/e0e7ff/3f51b5?text=Gráfico+de+Despesas" alt="Gráfico de Despesas" class="w-full h-auto rounded-md object-cover mt-4">
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-3">Relatório de Lucratividade</h2>
+                        <p class="text-gray-600 mb-4">Analise a rentabilidade da sua empresa.</p>
+                        <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 shadow-md">Gerar Relatório</button>
+                        <img src="https://placehold.co/400x200/e0e7ff/3f51b5?text=Gráfico+de+Lucratividade" alt="Gráfico de Lucratividade" class="w-full h-auto rounded-md object-cover mt-4">
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-700 mb-3">Relatório de Recebíveis e Pagáveis</h2>
+                        <p class="text-gray-600 mb-4">Monitore seus valores a receber e a pagar.</p>
+                        <button class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors duration-200 shadow-md">Gerar Relatório</button>
+                        <img src="https://placehold.co/400x200/e0e7ff/3f51b5?text=Gráfico+de+Contas" alt="Gráfico de Contas" class="w-full h-auto rounded-md object-cover mt-4">
+                    </div>
+                </div>
+            </section>
+
+            <section id="projections" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Projeções Financeiras</h1>
+                <p class="text-gray-600 mb-8">Crie projeções para planejar o futuro financeiro da sua empresa.</p>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Criar Nova Projeção</h2>
+                    <form id="projection-form">
+                        <div class="mb-4">
+                            <label for="projection-name" class="block text-sm font-medium text-gray-700 mb-1">Nome da Projeção</label>
+                            <input type="text" id="projection-name" name="projection-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Projeção 2025">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <label for="start-date" class="block text-sm font-medium text-gray-700 mb-1">Data de Início</label>
+                                <input type="date" id="start-date" name="start-date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                            <div>
+                                <label for="end-date" class="block text-sm font-medium text-gray-700 mb-1">Data de Término</label>
+                                <input type="date" id="end-date" name="end-date" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="expected-revenue" class="block text-sm font-medium text-gray-700 mb-1">Receita Esperada (R$)</label>
+                            <input type="number" id="expected-revenue" name="expected-revenue" step="0.01" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="0.00">
+                        </div>
+                        <div class="mb-4">
+                            <label for="expected-expense" class="block text-sm font-medium text-gray-700 mb-1">Despesa Esperada (R$)</label>
+                            <input type="number" id="expected-expense" name="expected-expense" step="0.01" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="0.00">
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors duration-200 shadow-md">Gerar Projeção</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="accounts" class="content-section hidden">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Gestão de Contas</h1>
+                <p class="text-gray-600 mb-8">Gerencie suas múltiplas contas bancárias em um só lugar.</p>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 mb-8">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Minhas Contas</h2>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-md border border-gray-200">
+                            <div>
+                                <p class="font-medium text-gray-800">Conta Corrente Principal</p>
+                                <p class="text-sm text-gray-500">Banco do Brasil</p>
+                            </div>
+                            <span class="text-blue-600 font-semibold">R$ 5.200,00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-md border border-gray-200">
+                            <div>
+                                <p class="font-medium text-gray-800">Conta Poupança</p>
+                                <p class="text-sm text-gray-500">Caixa Econômica Federal</p>
+                            </div>
+                            <span class="text-blue-600 font-semibold">R$ 1.500,00</span>
+                        </div>
+                        <div class="flex justify-between items-center p-4 bg-gray-50 rounded-md border border-gray-200">
+                            <div>
+                                <p class="font-medium text-gray-800">Cartão de Crédito (Fatura)</p>
+                                <p class="text-sm text-gray-500">Nubank</p>
+                            </div>
+                            <span class="text-red-600 font-semibold">-R$ 800,00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                    <h2 class="text-xl font-semibold text-gray-700 mb-4">Adicionar Nova Conta</h2>
+                    <form id="add-account-form">
+                        <div class="mb-4">
+                            <label for="account-name" class="block text-sm font-medium text-gray-700 mb-1">Nome da Conta</label>
+                            <input type="text" id="account-name" name="account-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Conta PJ, Poupança">
+                        </div>
+                        <div class="mb-4">
+                            <label for="bank-name" class="block text-sm font-medium text-gray-700 mb-1">Nome do Banco</label>
+                            <input type="text" id="bank-name" name="bank-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="Ex: Itaú, Santander">
+                        </div>
+                        <div class="mb-4">
+                            <label for="initial-balance" class="block text-sm font-medium text-gray-700 mb-1">Saldo Inicial (R$)</label>
+                            <input type="number" id="initial-balance" name="initial-balance" step="0.01" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" placeholder="0.00">
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors duration-200 shadow-md">Adicionar Conta</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('nav a');
+            const sections = document.querySelectorAll('.content-section');
+
+            // Função para mostrar a seção correta e atualizar o link ativo
+            const showSection = (sectionId) => {
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.remove('hidden');
+                document.getElementById(sectionId).classList.add('active');
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                    link.classList.remove('bg-gray-700'); /* Remove active background */
+                });
+                document.querySelector(`[data-section="${sectionId}"]`).classList.add('active-link');
+                document.querySelector(`[data-section="${sectionId}"]`).classList.add('bg-gray-700'); /* Add active background */
+            };
+
+            // Adicionar evento de clique aos links de navegação
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); // Previne o comportamento padrão do link
+                    const sectionId = event.target.closest('a').dataset.section;
+                    showSection(sectionId);
+                });
+            });
+
+            // Simular adição de transação
+            const transactionForm = document.getElementById('transaction-form');
+            const transactionsList = document.getElementById('transactions-list');
+
+            if (transactionForm) {
+                transactionForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const description = document.getElementById('description').value;
+                    const amount = parseFloat(document.getElementById('amount').value);
+                    const type = document.getElementById('type').value;
+                    const category = document.getElementById('category').value;
+
+                    if (description && !isNaN(amount) && amount > 0) {
+                        const amountClass = type === 'income' ? 'text-green-600' : 'text-red-600';
+                        const amountSign = type === 'income' ? '+' : '-';
+
+                        const newTransaction = document.createElement('div');
+                        newTransaction.className = 'flex justify-between items-center p-3 bg-gray-50 rounded-md border border-gray-200';
+                        newTransaction.innerHTML = `
+                            <div>
+                                <span class="font-medium text-gray-800">${description}</span>
+                                <span class="text-sm text-gray-500 block">${category}</span>
+                            </div>
+                            <span class="${amountClass} font-semibold">${amountSign}R$ ${amount.toFixed(2).replace('.', ',')}</span>
+                        `;
+                        transactionsList.prepend(newTransaction); // Adiciona no topo da lista
+
+                        // Limpa o formulário
+                        transactionForm.reset();
+                    } else {
+                        // Em um ambiente real, você usaria um modal ou mensagem de erro
+                        console.error('Por favor, preencha todos os campos da transação corretamente.');
+                    }
+                });
+            }
+
+            // Simular geração de projeção
+            const projectionForm = document.getElementById('projection-form');
+            if (projectionForm) {
+                projectionForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const projectionName = document.getElementById('projection-name').value;
+                    const startDate = document.getElementById('start-date').value;
+                    const endDate = document.getElementById('end-date').value;
+                    const expectedRevenue = parseFloat(document.getElementById('expected-revenue').value);
+                    const expectedExpense = parseFloat(document.getElementById('expected-expense').value);
+
+                    if (projectionName && startDate && endDate && !isNaN(expectedRevenue) && !isNaN(expectedExpense)) {
+                        // Em um ambiente real, você processaria e exibiria a projeção
+                        console.log('Projeção Gerada:', {
+                            projectionName,
+                            startDate,
+                            endDate,
+                            expectedRevenue,
+                            expectedExpense
+                        });
+                        alert('Projeção "' + projectionName + '" gerada com sucesso! (Verifique o console para detalhes)');
+                        projectionForm.reset();
+                    } else {
+                        console.error('Por favor, preencha todos os campos da projeção.');
+                    }
+                });
+            }
+
+            // Simular adição de conta
+            const addAccountForm = document.getElementById('add-account-form');
+            const accountsList = document.querySelector('#accounts .space-y-4'); // Seleciona a lista de contas existente
+
+            if (addAccountForm) {
+                addAccountForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const accountName = document.getElementById('account-name').value;
+                    const bankName = document.getElementById('bank-name').value;
+                    const initialBalance = parseFloat(document.getElementById('initial-balance').value);
+
+                    if (accountName && bankName && !isNaN(initialBalance)) {
+                        const newAccount = document.createElement('div');
+                        newAccount.className = 'flex justify-between items-center p-4 bg-gray-50 rounded-md border border-gray-200';
+                        newAccount.innerHTML = `
+                            <div>
+                                <p class="font-medium text-gray-800">${accountName}</p>
+                                <p class="text-sm text-gray-500">${bankName}</p>
+                            </div>
+                            <span class="text-blue-600 font-semibold">R$ ${initialBalance.toFixed(2).replace('.', ',')}</span>
+                        `;
+                        accountsList.appendChild(newAccount); // Adiciona ao final da lista
+
+                        alert('Conta "' + accountName + '" adicionada com sucesso!');
+                        addAccountForm.reset();
+                    } else {
+                        console.error('Por favor, preencha todos os campos da conta.');
+                    }
+                });
+            }
+
+
+            // Inicializa a exibição na seção do painel
+            showSection('dashboard');
+        });
+    </script>
+</body>
+</html>
